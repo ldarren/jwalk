@@ -1,0 +1,290 @@
+/*
+███████ ██████  ██ ████████  ██████  ██████
+██      ██   ██ ██    ██    ██    ██ ██   ██
+█████   ██   ██ ██    ██    ██    ██ ██████
+██      ██   ██ ██    ██    ██    ██ ██   ██
+███████ ██████  ██    ██     ██████  ██   ██
+2016 ~ Mark Hillard | (mark@)markhillard.com
+*/
+
+
+/* CSS Reset
+================================================== */
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+border:0;
+font:inherit;
+font-size:100%;
+margin:0;
+padding:0;
+vertical-align:baseline;
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+display:block;
+}
+
+body { line-height:1; }
+ul,ol { list-style:none; }
+blockquote,q { quotes:none; }
+blockquote::before,blockquote::after,q::before,q::after { content:none; }
+table { border-collapse:collapse; border-spacing:0; }
+
+button,input:not([type="checkbox"],[type="radio"]),textarea { appearance:none; background:none; }
+button::-moz-focus-inner,input::-moz-focus-inner { border:0; padding:0; }
+
+* { -webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-tap-highlight-color:transparent; }
+
+*,*::before,*::after { box-sizing:border-box; }
+*,*:focus { outline:none; }
+
+
+
+/* Global Page Styles
+================================================== */
+
+html,body {
+-webkit-font-smoothing:antialiased;
+-webkit-text-size-adjust:100%;
+font-family:"Source Code Pro", monospace;
+font-size:100%;
+font-weight:400;
+height:100%;
+line-height:1.45;
+overflow:hidden;
+}
+
+/* Highlighting */
+::selection { background-color:#282a36; color:#fff; }
+
+
+
+/* CodeMirror Overrides
+================================================== */
+
+.CodeMirror {
+font-family:"Source Code Pro", monospace;
+font-size:.9rem;
+height:100%;
+}
+
+.CodeMirror-lines {
+padding:0;
+}
+
+.CodeMirror-scrollbar-filler,
+.CodeMirror-gutter-filler {
+background-color:transparent;
+}
+
+.CodeMirror-overlayscroll-horizontal {
+height:10px;
+transition:height ease 300ms;
+}
+
+.CodeMirror-overlayscroll-horizontal:hover,
+.CodeMirror-overlayscroll-horizontal.hold {
+height:15px;
+}
+
+.CodeMirror-overlayscroll-vertical {
+transition:width ease 300ms;
+width:10px;
+}
+
+.CodeMirror-overlayscroll-vertical:hover,
+.CodeMirror-overlayscroll-vertical.hold {
+width:15px;
+}
+
+.CodeMirror-overlayscroll-horizontal div,
+.CodeMirror-overlayscroll-vertical div {
+background:rgba(255,255,255,.05);
+border-radius:0;
+}
+
+.CodeMirror-matchingtag,
+.CodeMirror-matchingbracket {
+background:none;
+border-bottom:1px solid #fff;
+text-decoration:none !important;
+}
+
+.CodeMirror-guttermarker-subtle {
+color:#6d8a88;
+}
+
+.CodeMirror-foldmarker {
+color:#fff;
+text-shadow:none;
+}
+
+
+
+/* jQuery UI Overrides
+================================================== */
+
+.ui-resizable-s {
+background-color:#0e0f13;
+cursor:row-resize !important;
+bottom:-16px !important;
+height:16px !important;
+}
+
+
+
+/* Utility Bar
+================================================== */
+
+#utils {
+background-color:#282a36;
+border-bottom:16px solid #0e0f13;
+display:flex;
+flex-direction:row;
+height:59px;
+}
+
+#utils > div {
+font-size:0;
+}
+
+.logo {
+width:43px;
+}
+
+.logo img {
+display:block;
+height:auto;
+width:100%;
+}
+
+.code-tools {
+position:absolute;
+right:0;
+}
+
+.code-tools span .fa {
+font-weight:400;
+}
+
+.code-tools span {
+background-color:#282a36;
+border-right:1px solid #0e0f13;
+color:#6d8a88;
+cursor:pointer;
+display:inline-block;
+font-size:1rem;
+font-weight:700;
+height:43px;
+padding:10px 15px;
+text-decoration:none;
+}
+
+.code-tools span.toggle-lineWrapping {
+border-left:1px solid #0e0f13;
+}
+
+.code-tools span:hover {
+background-color:#0e0f13;
+}
+
+.code-tools span.active,
+.code-tools span:active {
+background-color:#6d8a88 !important;
+color:#333540;
+}
+
+.code-tools span.toggle-tools {
+display:none;
+}
+
+/* Custom */
+@media only screen and (max-width:800px) {
+    .code-tools span {
+    border-left:1px solid #0e0f13;
+    display:block;
+    height:auto;
+    position:relative;
+    text-align:right;
+    z-index:100;
+    }
+    
+    .code-tools span:last-child {
+    border-bottom:1px solid #0e0f13;
+    }
+    
+    .code-tools span.toggle-tools {
+    display:block;
+    }
+    
+    .code-tools span.toggle-tools ~ span {
+    display:none;
+    }
+    
+    .code-tools span.toggle-tools.active,
+    .code-tools span.toggle-tools:active {
+    background-color:#0e0f13 !important;
+    color:#6d8a88;
+    }
+    
+    .code-tools span.toggle-tools.active ~ span {
+    border-top:1px solid #0e0f13;
+    display:block;
+    }
+}
+
+/* Mobile & Tablet */
+@media only screen and (max-width:800px) {
+    .logo {
+    position:absolute;
+    }
+    
+    .code-tools {
+    right:0;
+    }
+    
+    .code-tools span {
+    border-right:none;
+    }
+}
+
+/* IE10+ */
+@media screen and (-ms-high-contrast:active), (-ms-high-contrast:none) {
+    .toggle-lineWrapping {
+    padding:11px 15px 9px !important;
+    }
+}
+
+.json-stringify:active,
+.json-pretty:active {
+background-color:#6d8a88;
+color:#333540;
+}
+
+/* Editor
+================================================== */
+
+#editor {
+display:flex;
+flex-direction:column;
+height:calc(100vh - 59px);
+}
+
+.code-pane {
+height:50%;
+}
+
+.preview-pane {
+height:50%;
+position:relative;
+width:100%;
+}
+
+.preview-pane .code-pane-js{
+	margin-top:16px;
+}
+
+[class^="code-pane-"] {
+height:100%;
+position:relative;
+}
