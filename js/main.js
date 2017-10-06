@@ -25,29 +25,14 @@
 
 // make jQuery play nice
 var E = $.noConflict(true);
+var pJSON = pico.export('pico/json');
+var baseJson;
 
 // ready the DOM
 E(document).ready(function () {
     
     // INITIALIZE CODEMIRROR
     // ------------------------------
-    
-    // js code
-    var editorJS = CodeMirror.fromTextArea(jscode, {
-        mode: 'javascript',
-        keyMap: 'sublime',
-        lineNumbers: true,
-        lineWrapping: false,
-        theme: 'dracula',
-        tabSize: 4,
-        indentUnit: 4,
-        foldGutter: true,
-        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        scrollbarStyle: 'overlay',
-        styleActiveLine: true
-    });
     
     // json code
     var editorJSON = CodeMirror.fromTextArea(jsoncode, {
@@ -67,34 +52,67 @@ E(document).ready(function () {
 		lint: true
     });
     
+    // js code
+    var editorJS = CodeMirror.fromTextArea(jscode, {
+        mode: 'javascript',
+        keyMap: 'sublime',
+        lineNumbers: true,
+        lineWrapping: false,
+        theme: 'dracula',
+        tabSize: 4,
+        indentUnit: 4,
+        foldGutter: true,
+        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        scrollbarStyle: 'overlay',
+        styleActiveLine: true
+    });
+    
     // LOCAL STORAGE
     // ------------------------------
-    if (localStorage.getItem('jscode') === null) {
-        var defaultJS = '$(document).ready(function () {\n    $(\'h1\').fadeOut(800).fadeIn(800);\n    $(\'p\').first().delay(400).fadeOut(800).fadeIn(400);\n    $(\'p\').last().delay(800).fadeOut(800).fadeIn(400);\n});';
-        localStorage.setItem('jscode', defaultJS);
-    }
-    
     if (localStorage.getItem('jsoncode') === null) {
         var defaultJSON = '{"hello":"world"}';
         localStorage.setItem('jsoncode', defaultJSON);
     }
     
+    if (localStorage.getItem('jscode') === null) {
+        var defaultJS = '$';
+        localStorage.setItem('jscode', defaultJS);
+    }
+    
     // get local storage
     editorJS.setValue(localStorage.getItem('jscode'));
     editorJSON.setValue(localStorage.getItem('jsoncode'));
+	baseJson = parse(editorJSON.getValue());
     
     
     // EDITOR UPDATES
     // ------------------------------
     
     // editor update (js)
-    editorJS.on('change', function () {
-        localStorage.setItem('jscode', editorJS.getValue());
+    editorJSON.on('changes', function (cm, arr) {
+		if ('setValue' === arr[0].origin) return
+		var json = editorJSON.getValue();
+        localStorage.setItem('jsoncode', json);
+		baseJson = parse(json);
     });
     
     // editor update (js)
-    editorJSON.on('change', function () {
-        localStorage.setItem('jsoncode', editorJSON.getValue());
+    editorJS.on('changes', function (cm, arr) {
+		if ('setValue' === arr[0].origin) return
+		const jsBody = editorJS.getValue();
+        localStorage.setItem('jscode', jsBody);
+
+		if (!baseJson) return;
+
+		try {
+			const func = new Function('$', 'return '+jsBody);
+			const jwalk = func(pJSON.path(baseJson));
+			if (!jwalk || !jwalk.prototype) return;
+			editorJSON.setValue(JSON.stringify(jwalk(), null, '\t'));
+		} catch (ex) {
+		}
     });
     
     
@@ -205,8 +223,7 @@ E(document).ready(function () {
     
     // json stringify
     E('.json-stringify').on('click', function () {
-		try { editorJSON.setValue(JSON.stringify(JSON.parse(editorJSON.getValue()))) }
-		catch (exp) { console.error(exp) }
+		editorJSON.setValue(JSON.stringify(parse(editorJSON.getValue())))
     });
     
     // clear editor
