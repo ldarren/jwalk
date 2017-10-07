@@ -72,7 +72,12 @@ E(document).ready(function () {
     // LOCAL STORAGE
     // ------------------------------
     if (localStorage.getItem('jsoncode') === null) {
-        var defaultJSON = '{"hello":"world"}';
+        var defaultJSON = ```
+		{
+			"topic": {
+			}
+		}
+		```;
         localStorage.setItem('jsoncode', defaultJSON);
     }
     
