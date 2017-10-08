@@ -105,6 +105,7 @@ Let's practice JWalk expressions by some more examples. We start with a simple J
 | $..book[-1:] | $('..', 'book')( [-1] ) | the last book in order. |
 | $..book[0,1] | $('..', 'book')(0, 1) | the first two books |
 | $..book[:2] | $('..', 'book')([0, 2]) | the first two books |
-| $..book[?(@.isbn)] | $('..', 'book')( curr => curr.isbn ) | filter all books with isbn number |
-| $..book[?(@.price<10)] | $('..', 'book')( curr => curr.price < 10 ) | filter all books cheapier than 10 |
+| $..book[?(@.isbn)] | $('..', 'book')( curr => curr.isbn ? curr : void 0 ) | filter all books with isbn number |
+| $..book[?(@.price<10)] | $('..', 'book')( curr => curr.price < 10 ? curr : void 0 ) | filter all books cheapier than 10 |
+| N.A | $('..', 'book')( curr => curr.price * 3 ) | map all book prices multiple by 3 |
 | $..* | $('..', '*') | all Elements in XML document. All members of JSON structure. |
