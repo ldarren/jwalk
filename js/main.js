@@ -72,8 +72,7 @@ E(document).ready(function () {
     // LOCAL STORAGE
     // ------------------------------
     if (localStorage.getItem('jsoncode') === null) {
-        var defaultJSON = `
-{
+        var defaultJSON = `{
 	"tutorials": {
 		"list": [
 			{
@@ -81,12 +80,12 @@ E(document).ready(function () {
 				"hint": "at lower pane (console) type $('tutorials') to go to child tutorial node",
 				"homework": "go to list child node"
 			},{
-				"topic": "Indexing",
-				"hint": "at console type $('tutorials')('list')(0, 1) to see this tutorial 0 and 1 only, JWalk index is 0 based",
+				"topic": "Indexing ([0, 1, 2, ...])",
+				"hint": "at console type $('tutorials')('list')([0, 1]) to see this tutorial 0 and 1 only, JWalk index is 0 based",
 				"homework": "see tutorial 0, 1 and 2"
 			},{
-				"topic": "Listing",
-				"hint": "at console type $('tutorials')('list')([0, -1, 1]) to list all tutorials at step size of 1",
+				"topic": "Listing (from, to, step)",
+				"hint": "at console type $('tutorials')('list')(0, -1, 1) to list all tutorials at step size of 1",
 				"homework": "list odd index tutorials only"
 			},{
 				"topic": "Fast Forward",
@@ -103,8 +102,7 @@ E(document).ready(function () {
 			}
 		]
 	}
-}
-		`;
+}`;
         localStorage.setItem('jsoncode', defaultJSON);
     }
     
