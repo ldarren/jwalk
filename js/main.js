@@ -72,37 +72,39 @@ E(document).ready(function () {
     // LOCAL STORAGE
     // ------------------------------
     if (localStorage.getItem('jsoncode') === null) {
-        var defaultJSON = `{
-			"tutorials": {
-				"list": [
-					{
-						"topic": "Crawl before you walk",
-						"hint": "at lower pane (console) type $('tutorials') to go to child tutorial node",
-						"homework": "go to list child node"
-					},{
-						"topic": "Indexing",
-						"hint": "at console type $('tutorials')('list')(0, 1) to see this tutorial 0 and 1 only, JWalk index is 0 based",
-						"homework": "see tutorial 0, 1 and 2"
-					},{
-						"topic": "Listing",
-						"hint": "at console type $('tutorials')('list')([0, -1, 1]) to list all tutorials at step size of 1",
-						"homework": "list odd index tutorials only"
-					},{
-						"topic": "Fast Forward",
-						"hint": "at console type $('..', 'topic') to fast forward to all tutorial topic",
-						"homework": "fast forward to all homeworks"
-					},{
-						"topic": "Be Wild",
-						"hint": "at console type $('tutorials')( '*') to see all tutorials children",
-						"homework": "see all list children"
-					},{
-						"topic": "Mapping",
-						"hint": "at console type $('..','list')('*')( tutorial => tutorial.topic === 'Filtering') to this tutorial only",
-						"homework": "See tutorial with topic equal Listing"
-					}
-				]
+        var defaultJSON = `
+{
+	"tutorials": {
+		"list": [
+			{
+				"topic": "Crawl before you walk",
+				"hint": "at lower pane (console) type $('tutorials') to go to child tutorial node",
+				"homework": "go to list child node"
+			},{
+				"topic": "Indexing",
+				"hint": "at console type $('tutorials')('list')(0, 1) to see this tutorial 0 and 1 only, JWalk index is 0 based",
+				"homework": "see tutorial 0, 1 and 2"
+			},{
+				"topic": "Listing",
+				"hint": "at console type $('tutorials')('list')([0, -1, 1]) to list all tutorials at step size of 1",
+				"homework": "list odd index tutorials only"
+			},{
+				"topic": "Fast Forward",
+				"hint": "at console type $('..', 'topic') to fast forward to all tutorial topic",
+				"homework": "fast forward to all homeworks"
+			},{
+				"topic": "Be Wild",
+				"hint": "at console type $('tutorials')( '*') to see all tutorials children",
+				"homework": "see all list children"
+			},{
+				"topic": "Mapping",
+				"hint": "at console type $('..','list')('*')( tutorial => tutorial.topic === 'Filtering') to this tutorial only",
+				"homework": "See tutorial with topic equal Listing"
 			}
-		}`;
+		]
+	}
+}
+		`;
         localStorage.setItem('jsoncode', defaultJSON);
     }
     
