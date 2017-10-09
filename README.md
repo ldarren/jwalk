@@ -7,7 +7,7 @@ JSon is heavily based on the [Editor](https://markhillard.github.io/Editor/)
 - [jQuery UI - Resizable](https://jqueryui.com/resizable/)
 - [CodeMirror](https://codemirror.net/)
 - [FileSaver.js](https://github.com/eligrey/FileSaver.js)
-- [pico-common](https://github.com/ldarren/pico-common/bin/pico.js)
+- [pico-common](https://github.com/ldarren/pico-common/bin/pico.js) provides acutal jWalk implementation
 
 ## Features
 
