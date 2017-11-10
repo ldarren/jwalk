@@ -240,8 +240,8 @@ E(document).ready(function () {
 
 	function parse(str){
 		try { str = JSON.parse(str) }
-		catch (ex) { return alert('Failed to parse') }
-		if (!str) return alert('Not a valid json')
+		catch (ex) { return }
+		if (!str) return
 		if (str.charAt) return parse(str)
 		return str
 	}
